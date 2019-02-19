@@ -48,7 +48,7 @@ class App extends Component {
     this.setState({board: newBoard, gameEnded: false});
     this.unfocusWon();
     if (playerCount === 1 && !humanFirst) {
-      this.aiRandom(newBoard)
+      this.computerRandom(newBoard)
     }
   };
 
@@ -68,7 +68,7 @@ class App extends Component {
       this.gameWon(newBoard, human);
 
       if (playerCount === 1) {
-        this.aiTurn(newBoard)
+        this.computerTurn(newBoard)
       }
       if (playerCount === 2) {
         this.gameWon(newBoard, computer)
@@ -76,7 +76,7 @@ class App extends Component {
     }
   };
 
-  aiTurn = (board) => {
+  computerTurn = (board) => {
     let {computer, human, turn} = this.state;
     let newBoard = [...board];
     let bestMove = this.miniMax(board, computer).index;
@@ -104,8 +104,8 @@ class App extends Component {
     }
   };
 
-  // AI Mechanics
-  aiRandom = (board) => {
+  // Computer Mechanics
+  computerRandom = (board) => {
     let {computer, human} = this.state;
     let randomSquare = Math.floor(Math.random() * 9);
     board[randomSquare] = computer;
@@ -241,14 +241,14 @@ class App extends Component {
   render() {
     return (
           <div className="App">
-            <h1>Tic Tac Toe</h1>
+            <h1 className="main-title">Tic Tac Toe</h1>
             {this.state.humanFirst !== null ? (
                         <Board
                               {...this.state}
                               markSquare={this.markSquare}
                               returnMenu={this.returnMenu}
                               resetGame={this.resetGame}
-                              aiRandom={this.aiRandom}
+                              computerRandom={this.computerRandom}
                         />)
                   : null
             }

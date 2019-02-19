@@ -1,15 +1,17 @@
 import React from 'react'
 
-const Options = ({idName, title, clickHandlerOne, clickHandlerTwo, optionOne, optionTwo}) => {
+const Options = (props) => {
   return (
-        <div className="Options" id={idName}>
-          <h3>{title}</h3>
-          <span onClick={clickHandlerOne}>
-            {optionOne}
+        <div className="Options" id={props.idName}>
+          <h3>{props.title}</h3>
+          <div className="btn-wrap">
+             <span className="btn" onClick={props.clickHandlerOne}>
+            {props.optionOne}
           </span>
-          <span onClick={clickHandlerTwo}>
-            {optionTwo}
+            <span className="btn" onClick={props.clickHandlerTwo}>
+            {props.optionTwo}
           </span>
+          </div>
         </div>
   )
 };

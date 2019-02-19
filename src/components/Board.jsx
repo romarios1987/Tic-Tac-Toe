@@ -7,7 +7,7 @@ class Board extends Component {
   componentDidMount() {
     let {board} = this.props;
     if (this.props.playerCount === 1 && !this.props.humanFirst) {
-      this.props.aiRandom(board)
+      this.props.computerRandom(board)
     }
   }
 
@@ -44,25 +44,19 @@ class Board extends Component {
     return (
           <React.Fragment>
             <div className="Board">
-              <div className="row">
                 {this.createSquare(0)}
                 {this.createSquare(1)}
                 {this.createSquare(2)}
-              </div>
-              <div className="row">
                 {this.createSquare(3)}
                 {this.createSquare(4)}
                 {this.createSquare(5)}
-              </div>
-              <div className="row">
                 {this.createSquare(6)}
                 {this.createSquare(7)}
                 {this.createSquare(8)}
-              </div>
             </div>
-            <div className="Menus">
-              <span className="Board_menu" onClick={(event) => this.returnMenuHandler(event)}>Menu</span>
-              <span className="Board_reset" onClick={(event) => this.resetGameHandler(event)}>Reset</span>
+            <div className="Menus btn-wrap">
+              <span className="Board_menu btn" onClick={(event) => this.returnMenuHandler(event)}>Menu</span>
+              <span className="Board_reset btn" onClick={(event) => this.resetGameHandler(event)}>Reset</span>
             </div>
           </React.Fragment>
     )

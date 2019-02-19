@@ -4,7 +4,7 @@ const Square = (props) => {
 
   // gameEnded, markSquare
   return (
-        <div className={"coll button" + props.index + (props.gameEnded ? " ended" : " notEnded")}
+        <div className={"board_cell button" + props.index + (props.gameEnded ? " ended" : " notEnded")}
                 onClick={(event) => props.markSquare(event, props.index)}
         >
           {props.value}

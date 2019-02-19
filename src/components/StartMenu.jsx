@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import Options from './Options'
 
 class StartMenu extends Component {
-  versusAI = () => {
+  versusComputer = () => {
     let playerCount = 1;
     this.props.updatePlayers(playerCount)
   };
@@ -41,10 +41,10 @@ class StartMenu extends Component {
             {this.props.playerCount === null &&
             <Options
                   {...this.props}
-                  title='Against AI or Player?'
+                  title='Against computer or Player?'
                   idName="players"
-                  optionOne='AI'
-                  clickHandlerOne={this.versusAI}
+                  optionOne='Computer'
+                  clickHandlerOne={this.versusComputer}
                   optionTwo='Player'
                   clickHandlerTwo={this.versusPlayer}
             />
