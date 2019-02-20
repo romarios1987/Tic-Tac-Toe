@@ -1,5 +1,4 @@
 import React from 'react'
-
 const Options = (props) => {
   return (
         <div className="Options" id={props.idName}>

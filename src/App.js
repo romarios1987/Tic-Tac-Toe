@@ -241,7 +241,6 @@ class App extends Component {
     }
   };
 
-
   showResult = (result) => {
     if (result) {
       if (result === 'draw') {

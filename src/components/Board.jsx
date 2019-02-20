@@ -39,7 +39,6 @@ class Board extends Component {
     event.preventDefault();
     this.props.resetGame()
   };
-
   render() {
     return (
           <React.Fragment>

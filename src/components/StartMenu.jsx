@@ -73,5 +73,4 @@ class StartMenu extends Component {
     )
   }
 }
-
 export default StartMenu
