@@ -43,6 +43,7 @@ class Board extends Component {
   render() {
     return (
           <React.Fragment>
+
             <div className="Board">
                 {this.createSquare(0)}
                 {this.createSquare(1)}

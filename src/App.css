@@ -6,11 +6,10 @@
   color: #ffffff;
   font-family:'Nunito', sans-serif;
   background: #000046;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #1CB5E0, #000046);
-  background: linear-gradient(to right, #1CB5E0, #000046);
+  background: linear-gradient(to right, #009FFF, #ec2F4B);
 }
 
-.main-title{
+.App-title{
   margin-top: 7%;
 }
 

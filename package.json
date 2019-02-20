@@ -2,6 +2,7 @@
   "name": "tic-tac-toe",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://romarios1987.github.io/tic-tac-toe/",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "react": "^16.8.2",

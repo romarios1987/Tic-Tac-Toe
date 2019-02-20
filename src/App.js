@@ -13,7 +13,8 @@ class App extends Component {
     turn: null,
     playerCount: null,
     humanFirst: null,
-    gameEnded: false
+    gameEnded: false,
+    gameResult: null
   };
 
   // Menus and Options
@@ -38,14 +39,15 @@ class App extends Component {
       turn: null,
       playerCount: null,
       humanFirst: null,
-      gameEnded: false
+      gameEnded: false,
+      gameResult: null
     })
   };
 
   resetGame = () => {
     const {playerCount, humanFirst} = this.state;
     let newBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    this.setState({board: newBoard, gameEnded: false});
+    this.setState({board: newBoard, gameEnded: false, gameResult: null});
     this.unfocusWon();
     if (playerCount === 1 && !humanFirst) {
       this.computerRandom(newBoard)
@@ -97,10 +99,10 @@ class App extends Component {
           (board[0] === turn && board[4] === turn && board[8] === turn) ||
           (board[2] === turn && board[4] === turn && board[6] === turn)
     ) {
-      this.setState({gameEnded: true});
+      this.setState({gameEnded: true, gameResult: turn});
       this.focusWon(board, turn)
     } else if (this.findEmptySquares(board).length === 0) {
-      this.setState({gameEnded: true})
+      this.setState({gameEnded: true, gameResult: 'draw'})
     }
   };
 
@@ -156,7 +158,8 @@ class App extends Component {
 
       if (turn === computer) {
         const result = this.miniMax(newBoard, human);
-        move.score = result.score
+        move.score = result.score;
+
       } else {
         const result = this.miniMax(newBoard, computer);
         move.score = result.score
@@ -238,10 +241,23 @@ class App extends Component {
     }
   };
 
+
+  showResult = (result) => {
+    if (result) {
+      if (result === 'draw') {
+        return `It's a draw !`
+      } else {
+        return `Winner ${result} !`
+      }
+    }
+  };
+
   render() {
+    console.log(this.state);
     return (
           <div className="App">
-            <h1 className="main-title">Tic Tac Toe</h1>
+
+            <h1 className="App-title">Tic Tac Toe</h1>
             {this.state.humanFirst !== null ? (
                         <Board
                               {...this.state}
@@ -260,6 +276,8 @@ class App extends Component {
                   updateMarkers={this.updateMarkers}
                   updateTurns={this.updateTurns}
             />
+
+            <h2 className="App-result">{this.showResult(this.state.gameResult)}</h2>
 
           </div>
     )
