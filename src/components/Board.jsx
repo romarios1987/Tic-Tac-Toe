@@ -55,9 +55,9 @@ class Board extends Component {
                 {this.createSquare(7)}
                 {this.createSquare(8)}
             </div>
-            <div className="Menus btn-wrap">
-              <span className="Board_menu btn" onClick={(event) => this.returnMenuHandler(event)}>Menu</span>
-              <span className="Board_reset btn" onClick={(event) => this.resetGameHandler(event)}>Reset</span>
+            <div className="Menus Btn-wrap">
+              <span className="Board-menu Btn" onClick={(event) => this.returnMenuHandler(event)}>Menu</span>
+              <span className="Board-reset Btn" onClick={(event) => this.resetGameHandler(event)}>Reset</span>
             </div>
           </React.Fragment>
     )

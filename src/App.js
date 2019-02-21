@@ -88,23 +88,64 @@ class App extends Component {
     this.setState({board: newBoard, turn})
   };
 
+
   gameWon = (board, turn) => {
-    if (
-          (board[0] === turn && board[1] === turn && board[2] === turn) ||
-          (board[3] === turn && board[4] === turn && board[5] === turn) ||
-          (board[6] === turn && board[7] === turn && board[8] === turn) ||
-          (board[0] === turn && board[3] === turn && board[6] === turn) ||
-          (board[1] === turn && board[4] === turn && board[7] === turn) ||
-          (board[2] === turn && board[5] === turn && board[8] === turn) ||
-          (board[0] === turn && board[4] === turn && board[8] === turn) ||
-          (board[2] === turn && board[4] === turn && board[6] === turn)
-    ) {
-      this.setState({gameEnded: true, gameResult: turn});
-      this.focusWon(board, turn)
-    } else if (this.findEmptySquares(board).length === 0) {
-      this.setState({gameEnded: true, gameResult: 'draw'})
-    }
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    // for (let i = 0; i < lines.length; i++) {
+    //   const [a, b, c] = lines[i];
+    //   if (turn === board[a] && turn === board[b] && turn === board[c]) {
+    //     this.setState({gameEnded: true, gameResult: turn});
+    //     this.focusWon(board, turn)
+    //     //return true;
+    //   } else if (this.findEmptySquares(board).length === 0) {
+    //     this.setState({gameEnded: true, gameResult: 'draw'})
+    //   }
+    // }
+
+
+    lines.forEach((line) => {
+      const [a, b, c] = line;
+      if (turn === board[a] && turn === board[b] && turn === board[c]) {
+        this.setState({gameEnded: true, gameResult: turn});
+        this.focusWon(board, turn)
+      } else if (this.findEmptySquares(board).length === 0) {
+        this.setState({gameEnded: true, gameResult: 'draw'})
+      }
+    });
+
+
   };
+
+  // gameWon = (board, turn) => {
+  //   const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+  //
+  //
+  //
+  //   // if (
+  //   //       (board[0] === turn && board[1] === turn && board[2] === turn) ||
+  //   //       (board[3] === turn && board[4] === turn && board[5] === turn) ||
+  //   //       (board[6] === turn && board[7] === turn && board[8] === turn) ||
+  //   //       (board[0] === turn && board[3] === turn && board[6] === turn) ||
+  //   //       (board[1] === turn && board[4] === turn && board[7] === turn) ||
+  //   //       (board[2] === turn && board[5] === turn && board[8] === turn) ||
+  //   //       (board[0] === turn && board[4] === turn && board[8] === turn) ||
+  //   //       (board[2] === turn && board[4] === turn && board[6] === turn)
+  //   // ) {
+  //   //   this.setState({gameEnded: true, gameResult: turn});
+  //   //   this.focusWon(board, turn)
+  //   // } else if (this.findEmptySquares(board).length === 0) {
+  //   //   this.setState({gameEnded: true, gameResult: 'draw'})
+  //   // }
+  // };
 
   // Computer Mechanics
   computerRandom = (board) => {
@@ -120,21 +161,43 @@ class App extends Component {
     return emptySquares
   };
 
+  // checkWin = (board, turn) => {
+  //   if (
+  //         (board[0] === turn && board[1] === turn && board[2] === turn) ||
+  //         (board[3] === turn && board[4] === turn && board[5] === turn) ||
+  //         (board[6] === turn && board[7] === turn && board[8] === turn) ||
+  //         (board[0] === turn && board[3] === turn && board[6] === turn) ||
+  //         (board[1] === turn && board[4] === turn && board[7] === turn) ||
+  //         (board[2] === turn && board[5] === turn && board[8] === turn) ||
+  //         (board[0] === turn && board[4] === turn && board[8] === turn) ||
+  //         (board[2] === turn && board[4] === turn && board[6] === turn)
+  //   ) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // };
+
+
   checkWin = (board, turn) => {
-    if (
-          (board[0] === turn && board[1] === turn && board[2] === turn) ||
-          (board[3] === turn && board[4] === turn && board[5] === turn) ||
-          (board[6] === turn && board[7] === turn && board[8] === turn) ||
-          (board[0] === turn && board[3] === turn && board[6] === turn) ||
-          (board[1] === turn && board[4] === turn && board[7] === turn) ||
-          (board[2] === turn && board[5] === turn && board[8] === turn) ||
-          (board[0] === turn && board[4] === turn && board[8] === turn) ||
-          (board[2] === turn && board[4] === turn && board[6] === turn)
-    ) {
-      return true
-    } else {
-      return false
-    }
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    lines.forEach((line) => {
+      const [a, b, c] = line;
+      if (turn === board[a] && turn === board[b] && turn === board[c]) {
+        return true;
+      }
+    });
+    return false;
   };
 
   miniMax = (board, turn) => {
@@ -191,43 +254,67 @@ class App extends Component {
 
   // Visual Mechanics
   focusWon = (board, turn) => {
-    if (board[0] === turn && board[1] === turn && board[2] === turn) {
-      createSelector(0);
-      createSelector(1);
-      createSelector(2)
-    } else if (board[3] === turn && board[4] === turn && board[5] === turn) {
-      createSelector(3);
-      createSelector(4);
-      createSelector(5)
-    } else if (board[6] === turn && board[7] === turn && board[8] === turn) {
-      createSelector(6);
-      createSelector(7);
-      createSelector(8)
-    } else if (board[0] === turn && board[3] === turn && board[6] === turn) {
-      createSelector(0);
-      createSelector(3);
-      createSelector(6)
-    } else if (board[1] === turn && board[4] === turn && board[7] === turn) {
-      createSelector(1);
-      createSelector(4);
-      createSelector(7)
-    } else if (board[2] === turn && board[5] === turn && board[8] === turn) {
-      createSelector(2);
-      createSelector(5);
-      createSelector(8)
-    } else if (board[0] === turn && board[4] === turn && board[8] === turn) {
-      createSelector(0);
-      createSelector(4);
-      createSelector(8)
-    } else if (board[2] === turn && board[4] === turn && board[6] === turn) {
-      createSelector(2);
-      createSelector(4);
-      createSelector(6)
-    }
+
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    lines.forEach((line) => {
+      const [a, b, c] = line;
+      console.log(line);
+      if (board[a] === turn && board[b] === turn && board[c] === turn) {
+        console.log(board[a], board[b], board[c]);
+        createSelector(a);
+        createSelector(b);
+        createSelector(c);
+      }
+    });
+
+    // if (board[0] === turn && board[1] === turn && board[2] === turn) {
+    //   createSelector(0);
+    //   createSelector(1);
+    //   createSelector(2)
+    // } else if (board[3] === turn && board[4] === turn && board[5] === turn) {
+    //   createSelector(3);
+    //   createSelector(4);
+    //   createSelector(5)
+    // } else if (board[6] === turn && board[7] === turn && board[8] === turn) {
+    //   createSelector(6);
+    //   createSelector(7);
+    //   createSelector(8)
+    // } else if (board[0] === turn && board[3] === turn && board[6] === turn) {
+    //   createSelector(0);
+    //   createSelector(3);
+    //   createSelector(6)
+    // } else if (board[1] === turn && board[4] === turn && board[7] === turn) {
+    //   createSelector(1);
+    //   createSelector(4);
+    //   createSelector(7)
+    // } else if (board[2] === turn && board[5] === turn && board[8] === turn) {
+    //   createSelector(2);
+    //   createSelector(5);
+    //   createSelector(8)
+    // } else if (board[0] === turn && board[4] === turn && board[8] === turn) {
+    //   createSelector(0);
+    //   createSelector(4);
+    //   createSelector(8)
+    // } else if (board[2] === turn && board[4] === turn && board[6] === turn) {
+    //   createSelector(2);
+    //   createSelector(4);
+    //   createSelector(6)
+    // }
 
     function createSelector(num) {
       return document.querySelector(`.button${num}`).style.background = "mediumspringgreen"
     }
+
   };
 
   unfocusWon = () => {
